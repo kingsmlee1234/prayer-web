@@ -1,0 +1,12 @@
+# .gitignore
+
+# 파이썬 캐시 파일 무시
+__pycache__/
+*.pyc
+
+# 데이터베이스 파일 무시
+database.db
+
+# 가상환경 폴더 무시 (나중에 만들 경우)
+.venv/
+venv/

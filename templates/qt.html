@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>QT 노트 작성</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+        textarea { width: 98%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 10px;}
+        .share-option { margin-bottom: 15px; }
+        button[type="submit"] { background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>📖 QT 노트 작성하기</h1>
+    <form action="/qt" method="post">
+        <textarea name="content" rows="10" placeholder="오늘 말씀을 통해 깨달은 점, 감사한 점, 기도할 점을 자유롭게 기록해보세요." required></textarea>
+        
+        <div class="share-option">
+            <input type="checkbox" id="share" name="share_to_prayers" value="true">
+            <label for="share">이 내용을 '기도의 창'에도 익명으로 공유하기</label>
+        </div>
+
+        <button type="submit">저장하기</button>
+    </form>
+    <br><br>
+    <a href="/">← 메인으로 돌아가기</a>
+</body>
+</html>

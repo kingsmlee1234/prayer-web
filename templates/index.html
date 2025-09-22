@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>오늘의-기도</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; background-color: #f9f9f9; }
+        h1, h2, h3 { color: #333; }
+        a { color: #007bff; text-decoration: none; }
+        .verse { background: white; border: 1px solid #e0e0e0; padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0; }
+        .prayer-card { background: white; border: 1px solid #e0e0e0; padding: 15px; margin-bottom: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .pray-form button { background-color: #007bff; border: none; color: white; padding: 8px 12px; border-radius: 5px; cursor: pointer; }
+        textarea { width: 98%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        button[type="submit"] { background-color: #28a745; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🙏 오늘의-기도</h1>
+    <p>말씀으로 나를 채우고, 기도로 우리를 세우는 공간</p>
+
+    <div class="verse">
+        <h3>오늘의 말씀</h3>
+        <p>"{{ verse }}"</p>
+        <a href="/qt">QT 노트 작성하기 →</a>
+    </div>
+
+    <h2>🕊️ 기도의 창</h2>
+    
+    {% for prayer in prayers %}
+        <div class="prayer-card">
+            <span>{{ prayer.content }} (🙏 {{ prayer.pray_count }})</span>
+            <form class="pray-form" action="/prayer/{{ prayer.id }}/pray" method="post">
+                <button type="submit">기도하기</button>
+            </form>
+        </div>
+    {% endfor %}  <hr style="margin: 30px 0;">
+    <h3>기도제목 나누기</h3>
+    <form action="/prayer" method="post">
+        <textarea name="content" rows="3" placeholder="기도제목을 익명으로 나눠주세요." required></textarea><br><br>
+        <button type="submit">나누기</button>
+    </form>
+</body>
+</html>
