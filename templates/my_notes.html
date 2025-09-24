@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>나의 QT 노트</title>
+</head>
+<body>
+    <h1>{{ session.username }}님의 QT 노트</h1>
+    <a href="{{ url_for('index') }}">메인으로 돌아가기</a>
+    <hr>
+    {% for note in notes %}
+        <div>
+            <p>{{ note.content }}</p>
+            <small>{{ note.created_at }}</small>
+        </div>
+        <hr>
+    {% else %}
+        <p>작성된 노트가 없습니다.</p>
+    {% endfor %}
+</body>
+</html>

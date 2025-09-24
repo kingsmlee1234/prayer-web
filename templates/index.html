@@ -12,31 +12,50 @@
         .pray-form button { background-color: #007bff; border: none; color: white; padding: 8px 12px; border-radius: 5px; cursor: pointer; }
         textarea { width: 98%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
         button[type="submit"] { background-color: #28a745; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; }
+        .navigation { text-align: right; margin-bottom: 20px; }
+        .navigation a { margin-left: 15px; }
+        .navigation span { font-weight: bold; }
     </style>
 </head>
 <body>
+    <div class="navigation">
+        {% if session.user_id %}
+            <span>{{ session.username }}님, 환영합니다!</span>
+            <a href="{{ url_for('my_notes') }}">나의 QT 노트</a>
+            <a href="{{ url_for('logout') }}">로그아웃</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">로그인</a>
+            <a href="{{ url_for('register') }}">회원가입</a>
+        {% endif %}
+    </div>
+
     <h1>🙏 오늘의-기도</h1>
     <p>말씀으로 나를 채우고, 기도로 우리를 세우는 공간</p>
 
     <div class="verse">
         <h3>오늘의 말씀</h3>
         <p>"{{ verse }}"</p>
-        <a href="/qt">QT 노트 작성하기 →</a>
+        <a href="{{ url_for('qt_page') }}">QT 노트 작성하기 →</a>
     </div>
 
     <h2>🕊️ 기도의 창</h2>
-    
     {% for prayer in prayers %}
         <div class="prayer-card">
-            <span>{{ prayer.content }} (🙏 {{ prayer.pray_count }})</span>
+            <span>
+                <strong>{{ prayer.author_nickname or '익명' }}</strong>: 
+                {{ prayer.content }} (🙏 {{ prayer.pray_count }})
+            </span>
             <form class="pray-form" action="/prayer/{{ prayer.id }}/pray" method="post">
                 <button type="submit">기도하기</button>
             </form>
         </div>
-    {% endfor %}  <hr style="margin: 30px 0;">
+    {% endfor %} <hr style="margin: 30px 0;">
     <h3>기도제목 나누기</h3>
     <form action="/prayer" method="post">
-        <textarea name="content" rows="3" placeholder="기도제목을 익명으로 나눠주세요." required></textarea><br><br>
+        <textarea name="content" rows="3" placeholder="기도제목을 나눠주세요." required></textarea><br>
+        <input type="checkbox" id="anonymous" name="is_anonymous" value="true">
+        <label for="anonymous">익명으로 게시하기</label>
+        <br><br>
         <button type="submit">나누기</button>
     </form>
 </body>
